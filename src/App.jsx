@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function App(){
   throw new Error('Estou aprendendo ReactJS')
 
