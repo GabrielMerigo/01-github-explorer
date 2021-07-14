@@ -1,6 +1,7 @@
 import { RepositoryItem } from "./RepositoryItem";
 import { useState, useEffect } from "react";
-import '../styles/repositories.scss'
+
+import '../styles/repositories.scss';
 
 export function RepositoryList() {
   const [repos, setRepos] = useState([]);
