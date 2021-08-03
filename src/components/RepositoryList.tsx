@@ -8,7 +8,10 @@ export function RepositoryList() {
   useEffect(() => {
     fetch('https://api.github.com/users/gabrielmerigo/repos')
       .then(response => response.json())
-      .then(data => setRepos(data))
+      .then(data => {
+        setRepos(data)
+        console.log(data)
+      })
       .catch(err => console.log(err))
   }, []);
 
