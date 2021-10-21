@@ -1,12 +1,11 @@
 import './styles/global.scss';
-import { RepositoryList } from './components/RepositoryList';
+import { Home } from './components/RepositoryList';
+import { AuthProvider } from '../contexts/AuthContexts'
 
 export default function App() {
   return (
-    <>
-      <RepositoryList />
-
-      
-    </>
+    <AuthProvider>
+      <Home /> 
+    </AuthProvider>
   )
 }

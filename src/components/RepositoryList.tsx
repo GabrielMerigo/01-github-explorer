@@ -1,29 +1,32 @@
-import { RepositoryItem, Repository } from "./RepositoryItem";
-import { useState, useEffect } from "react"; 
+import { FormEvent, useContext, useState } from "react"; 
 import '../styles/repositories.scss';
+import { AuthContext } from '../../contexts/AuthContexts';
 
-export function RepositoryList() {
-  const [repos, setRepos] = useState<Repository[]>([])
+export function Home() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    fetch('https://api.github.com/users/gabrielmerigo/repos')
-      .then(response => response.json())
-      .then(data => {
-        setRepos(data)
-        console.log(data)
-      })
-      .catch(err => console.log(err))
-  }, []);
+  const { signIn } = useContext(AuthContext);
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    const data = {
+      email,
+      password
+    }
+
+    await signIn(data)
+  }
 
   return (
     <section className="repository-list">
-      <h1>Lista de Repositórios</h1>
+      <h1>Formulário</h1>
 
-      <ul>
-        {repos.map(repo => {
-          return <RepositoryItem key={repo.id} repository={repo} />
-        })}
-      </ul>
+      <form onSubmit={handleSubmit}>
+        <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <button type="submit">Entrar</button>
+      </form>
     </section>
   )
 }
